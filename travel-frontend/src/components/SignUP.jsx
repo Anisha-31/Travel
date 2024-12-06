@@ -8,8 +8,30 @@ import {
   Grid2,
   Link,
 } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
 
 const SignUP = () => {
+
+  const [formData , setformData]=useState({
+    name:"",
+    email:"",
+    password:"",
+    confirmPassword:""
+  })
+const handleChange = async (e) =>{
+  const {name , value} = e.target
+  setformData({...formData , [name]:value})
+}
+const handleSubmit= async (e)=>{
+  e.preventDefault();
+  console.log("Form data being sent:", formData); // Debugging
+  const response = await axios.post( "http://localhost:8000/api/auth/register" , formData)
+}
+
+
+
+
   return (
     <Grid2 container component="main" sx={{ height: "100vh" }}>
       {/* Left Side - Optional Branding or Image */}
@@ -37,7 +59,9 @@ const SignUP = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+         
           }}
+         
         >
           {/* Page Title */}
           <Typography component="h1" variant="h5">
@@ -45,7 +69,7 @@ const SignUP = () => {
           </Typography>
 
           {/* Signup Form */}
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}  onSubmit={handleSubmit}>
             {/* Name Field */}
             <TextField
               margin="normal"
@@ -56,6 +80,7 @@ const SignUP = () => {
               name="name"
               autoComplete="name"
               autoFocus
+              onChange={handleChange}
             />
 
             {/* Email Field */}
@@ -67,6 +92,7 @@ const SignUP = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={handleChange}
             />
 
             {/* Password Field */}
@@ -79,6 +105,7 @@ const SignUP = () => {
               type="password"
               id="password"
               autoComplete="new-password"
+              onChange={handleChange}
             />
 
             {/* Confirm Password Field */}
@@ -91,6 +118,7 @@ const SignUP = () => {
               type="password"
               id="confirm-password"
               autoComplete="new-password"
+              onChange={handleChange}
             />
 
             {/* Signup Button */}

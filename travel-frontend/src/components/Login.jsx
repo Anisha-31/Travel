@@ -1,11 +1,26 @@
 import React from "react";
 import { TextField, Button, Box, Typography, Paper, Grid2 } from "@mui/material";
-
+import axios from 'axios'
+import { useState } from "react";
 const Login = () => {
 
 
+  const [formData , setformData] = useState({
+    email:"",
+    password:""
+  });
+
+
+
+const handleChange = async (e) =>{
+  const { name, value } = e.target;
+    setformData({ ...formData, [name]: value });
+}
+
   const handleSubmit=async (e)=>{
-    console.log(e.target.email)
+    e.preventDefault()
+
+    const response = await axios.post( "http://localhost:8000/api/auth/login" , formData);
 
   }
   return (
@@ -51,6 +66,7 @@ const Login = () => {
             component="form"
             noValidate
             sx={{ mt: 1 }}
+            onSubmit={handleSubmit}
           >
             {/* Email Field */}
             <TextField
@@ -62,6 +78,7 @@ const Login = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             
             {/* Password Field */}
@@ -74,6 +91,7 @@ const Login = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             
             {/* Login Button */}
@@ -82,7 +100,7 @@ const Login = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onSubmit={handleSubmit}
+           
             >
               Login
             </Button>

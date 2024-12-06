@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 
 exports.register = async(req,res)=>{
     try{
-        const {name , email , password} = req.body
-        const new_user = user({name , email , password
+        const {username , email , password , confirmpassword} = req.body
+        const new_user = user({username , email , password, confirmpassword
         });
-        // const existing_email = await user.findOne({email})
-        // if(existing_email) return res.status(400).json({message:'User already exists'});
+        const existing_email = await user.findOne({email})
+        if(existing_email) return res.status(400).json({message:'User already exists'});
         await new_user.save();
         res.status(201).json({message:'User Saved Successfully'})
 

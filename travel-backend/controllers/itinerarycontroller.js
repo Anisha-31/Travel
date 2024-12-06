@@ -8,7 +8,7 @@ exports.created=async(req,res)=>{
         res.status(201).json({message:'Itinerary Created'})
     }
     catch(error){
-        res.status(400).json({error:error.message})
+        res.status(400).json({error:error.reason || error.message || 'create'})
     }
 }
 exports.deleted=async(req,res)=>{
@@ -20,7 +20,7 @@ try{
     res.status(201).json({message:'Itinerary Deleted'})
 
 }catch(error){
-    res.status(400).json({error:error.message})
+    res.status(400).json({error:error.reason})
 }
 
 }
@@ -34,7 +34,7 @@ exports.get=async(req,res)=>{
            
     }
     catch(error){
-        res.status(400).json({error:error.message})
+        res.status(400).json({error:error.reason})
     }
 }
 
