@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUP = () => {
-
+  const navigate =useNavigate()
   const [formData , setformData]=useState({
     name:"",
     email:"",
@@ -26,7 +27,11 @@ const handleChange = async (e) =>{
 const handleSubmit= async (e)=>{
   e.preventDefault();
   console.log("Form data being sent:", formData); // Debugging
+  
   const response = await axios.post( "http://localhost:8000/api/auth/register" , formData)
+  navigate("/")
+
+
 }
 
 
