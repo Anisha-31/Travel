@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const itinerary = new mongoose.Schema({
     title:{type :"string"  , require : true} ,
     description :{type : "string" , require:true},
-    // date : Date.now,
+    //  date : Date.now,
 
 })
 

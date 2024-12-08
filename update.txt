@@ -1,0 +1,1 @@
+Today the client side was working well on edge and was giving numerous errors while running on chrome.
