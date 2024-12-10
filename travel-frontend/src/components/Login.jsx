@@ -2,8 +2,11 @@ import React from "react";
 import { TextField, Button, Box, Typography, Paper, Grid2 } from "@mui/material";
 import axios from 'axios'
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
+
 const Login = () => {
 
+  const navigate=useNavigate()
 
   const [formData , setformData] = useState({
     email:"",
@@ -21,6 +24,7 @@ const handleChange = async (e) =>{
     e.preventDefault()
 
     const response = await axios.post( "http://localhost:8000/api/auth/login" , formData);
+    navigate("/")
 
   }
   return (
